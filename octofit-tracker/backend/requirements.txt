@@ -1,3 +1,6 @@
 # Required packages for the backend
 Django>=3.2,<4.0
 psycopg2-binary
+djangorestframework
+pymongo
+django-cors-headers
