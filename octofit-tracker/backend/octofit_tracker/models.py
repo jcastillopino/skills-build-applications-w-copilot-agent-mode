@@ -1,23 +1,48 @@
-from mongoengine import Document, StringField, EmailField, ListField, ReferenceField, IntField
+from django.db import models
+from djongo import models as djongo_models
 
-class User(Document):
-    username = StringField(max_length=100, required=True)
-    email = EmailField(unique=True, required=True)
-    password = StringField(max_length=100, required=True)
+class User(models.Model):
+    _id = djongo_models.ObjectIdField(primary_key=True)
+    username = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.username
 
-class Team(Document):
-    name = StringField(max_length=100, unique=True, required=True)
-    members = ListField(ReferenceField(User))
+class Team(models.Model):
+    _id = djongo_models.ObjectIdField(primary_key=True)
+    name = models.CharField(max_length=100, unique=True)
+    members = djongo_models.ArrayReferenceField(
+        to=User,
+        on_delete=models.CASCADE,
+        blank=True
+    )
+    
+    def __str__(self):
+        return self.name
 
-class Activity(Document):
-    user = ReferenceField(User, required=True)
-    activity_type = StringField(max_length=100, required=True)
-    duration_seconds = IntField(required=True)  # Store duration in seconds
+class Activity(models.Model):
+    _id = djongo_models.ObjectIdField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    activity_type = models.CharField(max_length=100)
+    duration_seconds = models.IntegerField()  # Store duration in seconds
+    
+    def __str__(self):
+        return f"{self.user.username}'s {self.activity_type} activity"
 
-class Leaderboard(Document):
-    user = ReferenceField(User, required=True)
-    score = IntField(required=True)
+class Leaderboard(models.Model):
+    _id = djongo_models.ObjectIdField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    
+    def __str__(self):
+        return f"{self.user.username}'s score: {self.score}"
 
-class Workout(Document):
-    name = StringField(max_length=100, required=True)
-    description = StringField()
+class Workout(models.Model):
+    _id = djongo_models.ObjectIdField(primary_key=True)
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.name

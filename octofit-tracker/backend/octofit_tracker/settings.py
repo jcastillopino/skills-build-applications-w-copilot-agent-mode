@@ -74,8 +74,15 @@ WSGI_APPLICATION = "octofit_tracker.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# Database configuration for MongoDB
-DATABASES = {}
+# Database configuration for MongoDB using djongo
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'octofit_db',
+        'HOST': 'localhost',
+        'PORT': 27017,
+    }
+}
 
 
 # CORS Configuration
@@ -140,11 +147,3 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# MongoEngine settings
-from mongoengine import connect
-connect(
-    db="octofit_db",
-    host="localhost",
-    port=27017
-)
