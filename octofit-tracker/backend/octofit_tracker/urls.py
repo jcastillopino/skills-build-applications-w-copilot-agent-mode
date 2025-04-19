@@ -29,6 +29,7 @@ router.register(r'workouts', views.WorkoutViewSet, basename='workout')
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', views.api_root, name='api-root'),
     path('api-root/', include(router.urls)),
+    path('admin/', admin.site.urls),
 ]
