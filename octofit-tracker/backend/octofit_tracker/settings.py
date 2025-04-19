@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-)x&5ah2d32r7y@=ctuvb@^bq^w(+-9%vupq2-v*@k^8xp5jekf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['solid-xylophone-p7w6xq49r5c5rr-8000.app.github.dev', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -147,3 +147,12 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# REST Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'octofit_tracker.renderers.BSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+}
