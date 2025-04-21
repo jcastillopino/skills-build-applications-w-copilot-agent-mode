@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import API_ENDPOINTS from '../config';
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(API_ENDPOINTS.users)
+    fetch('https://solid-xylophone-p7w6xq49r5c5rr-8000.app.github.dev/api/users/')
       .then(response => response.json())
       .then(data => {
         setUsers(data);

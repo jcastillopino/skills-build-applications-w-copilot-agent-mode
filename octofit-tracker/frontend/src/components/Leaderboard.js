@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import API_ENDPOINTS from '../config';
 
 function Leaderboard() {
   const [leaderboardEntries, setLeaderboardEntries] = useState([]);
@@ -7,14 +6,14 @@ function Leaderboard() {
 
   useEffect(() => {
     // Fetch leaderboard data
-    fetch(API_ENDPOINTS.leaderboard)
+    fetch('https://solid-xylophone-p7w6xq49r5c5rr-8000.app.github.dev/api/leaderboard/')
       .then(response => response.json())
       .then(async data => {
         // Create an array to store entries with user details
         const entriesWithUsers = await Promise.all(data.map(async entry => {
           // For each entry, fetch the user details
           try {
-            const userResponse = await fetch(API_ENDPOINTS.getUser(entry.user));
+            const userResponse = await fetch(`https://solid-xylophone-p7w6xq49r5c5rr-8000.app.github.dev/api/users/${entry.user}/`);
             const userData = await userResponse.json();
             
             // Return the entry with user details

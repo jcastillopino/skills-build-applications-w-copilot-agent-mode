@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import API_ENDPOINTS from '../config';
 
 function Teams() {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(API_ENDPOINTS.teams)
+    fetch('https://solid-xylophone-p7w6xq49r5c5rr-8000.app.github.dev/api/teams/')
       .then(response => response.json())
       .then(data => {
         setTeams(data);
