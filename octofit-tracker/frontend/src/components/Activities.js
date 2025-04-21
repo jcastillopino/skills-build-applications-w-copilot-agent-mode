@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import API_ENDPOINTS from '../config';
 
 function Activities() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://solid-xylophone-p7w6xq49r5c5rr-8000.app.github.dev/api-root/activities/')
+    fetch(API_ENDPOINTS.activities)
       .then(response => response.json())
       .then(data => {
         setActivities(data);

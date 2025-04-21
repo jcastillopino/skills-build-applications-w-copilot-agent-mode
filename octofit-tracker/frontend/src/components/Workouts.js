@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import API_ENDPOINTS from '../config';
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://solid-xylophone-p7w6xq49r5c5rr-8000.app.github.dev/api-root/workouts/')
+    fetch(API_ENDPOINTS.workouts)
       .then(response => response.json())
       .then(data => {
         setWorkouts(data);
