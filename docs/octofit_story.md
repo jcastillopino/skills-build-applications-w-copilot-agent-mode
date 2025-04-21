@@ -131,3 +131,6 @@ We'll be using a modern web application stack:
    - Connecting to backend APIs
    - Python Django business logic
    - MongoDB data layer
+
+6. **DB start command**
+   - MongoDB should be started manually with this command `mongod --dbpath /workspace/mongodb-data --bind_ip 0.0.0.0 --port 27017`
